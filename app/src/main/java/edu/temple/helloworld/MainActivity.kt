@@ -15,14 +15,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize with views defined in Layout - the first one is done for you
-        displayTextView = findViewById(R.id.displayTextView)
-
-        
         findViewById<Button>(R.id.clickMeButton).setOnClickListener {
             displayTextView.text = "Hello, ${findViewById<EditText>(R.id.nameEditText).text}"
         }
 
+        displayTextView = findViewById(R.id.displayTextView)
+        val editText = findViewById<EditText>(R.id.nameEditText)
+        val button = findViewById<Button>(R.id.clickMeButton)
+
+
+
+        button.setOnClickListener {
+            val text = editText.text.toString().trim()
+
+            if (text.isEmpty()) {
+                editText.error = "This field cannot be empty"
+
+
+            } else{
+                editText.error = null
+                displayTextView.text = "Hello, ${findViewById<EditText>(R.id.nameEditText).text}"
+            }
+        }
 
     }
 }
